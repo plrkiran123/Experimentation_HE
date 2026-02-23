@@ -24,3 +24,18 @@ g++ -std=c++17 clustering.cpp -o clustering \
 
 ./encryption
 ./clustering
+
+
+# Parameter Mapping to Thesis Table 5.2
+
+| Thesis Parameter | Code Location | Example Values Used |
+|---|---|---|
+| Ring Dim $N$ | `src/main.cpp:130` | 8192, 16k, 32k |
+| Mult Depth $L$ | `config/params.yaml` | 3,4,6,10 |
+| Batch Size | `src/packing.cpp:45` | 1024, 4096, 16384 |
+| Scale | `src/ckks.cpp:89` | $2^{40}$ (40 bits) |
+
+# Reproduce Table 6.4 Results
+```bash
+cd HE
+python scripts/run_kmeans.py --n 1e6 --k 8 --N 16384 --depth 4 --scale 40 --batch 4096
